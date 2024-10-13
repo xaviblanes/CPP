@@ -9,27 +9,45 @@
 #include <math.h>
 using namespace std;
 
+// ++++++++++ Classe Matriu d'enters ++++++++++
+// Tindrem: files, columnes, una matriu bidimensinal 
+// d'enters i els seus mètodes 
+
 class Matriu {
 private:
     int files, columnes;
     int m[10][10];
     
 public:
+
+// ++++++++++ consultar el nombre de files d'una matriu ++++++++++
+
     int filesMatriu(){return this -> files;}
+
+// ++++++++++ consultar el nombre de columnes d'una matriu ++++++++++
 
     int columnesMatriu(){return this -> columnes;}
 
+// ++++++++++ consultar un element concret d'una matriu ++++++++++
+
     int elementMatriu(int i, int j){return this -> m[i][j];}
     
+// ++++++++++ retorna true si el rang de la matriu que crida ++++++++++
+// al mètode és el mateix que el de la matriu passada com a paràmetre
+
     bool mateixRang(Matriu m){
         return (m.filesMatriu() == this -> filesMatriu())&&
         (m.columnesMatriu() == this -> columnesMatriu());
     }
+
+// ++++++++++ retorna true si el nombre de files és iguals al de columnes ++++++++++
     
     bool esQuadrada(){
         return this -> files == this ->columnes;
     }
     
+// ++++++++++ multiplica una matriu per un escalar ++++++++++
+
     Matriu perEscalar(int n){
        Matriu aux;
        int i, j, fil, col;
@@ -40,6 +58,9 @@ public:
             aux.m[i][j] = this -> elementMatriu(i,j) * n;
         return aux;    
     }
+
+// ++++++++++ elimina de una matriu la fila i la columna ++++++++++
+// indicada el els paràmetres
 
     Matriu menorMatriu(int x, int y){
         Matriu aux;
@@ -61,7 +82,8 @@ public:
         return aux;    
     }
 
-    
+// ++++++++++ retorna la transposada d'una matriu ++++++++++
+
     Matriu transposada(){
         Matriu trans;
         int i, j, fil, col;
@@ -74,6 +96,8 @@ public:
         trans.columnes = fil;
         return trans;    
     }
+
+// ++++++++++ retorna el valor del determinant d'una matriu ++++++++++
 
         int determinant(){
         Matriu aux;
@@ -90,6 +114,9 @@ public:
         return det;    
     }
     
+// ++++++++++ suma dues matrius, sumar m + (-1)·n és  ++++++++++
+// el mateix que restar n de m. Aleshores resta no cal.
+
     Matriu sumarMatriu(Matriu m, Matriu n){
        Matriu suma;
        int i, j;
@@ -98,6 +125,8 @@ public:
             suma.m[i][j] = m.elementMatriu(i,j) + n.elementMatriu(i,j);
         return suma;
     }
+
+// ++++++++++ escriu per pantalla una matriu ++++++++++
 
     void escriureMatriu(){
         int i, j, fil, col;
@@ -110,7 +139,9 @@ public:
             }
         return ;
     }
-    
+
+// ++++++++++ llig per teclat una matriu ++++++++++
+
     Matriu llegirMatriu(){
         Matriu matriu;
         int i, j;
@@ -144,8 +175,6 @@ int main() {
     menor = m.menorMatriu(1,1);
     menor.escriureMatriu();
 
-
-/*    
     n = n.llegirMatriu();
     n.escriureMatriu();
 
@@ -165,6 +194,5 @@ int main() {
         resta.escriureMatriu();
         }
     else cout << "No és poden restar perquè no tenen el mateix rang!!" << endl;
-*/
     return 0;
 }
