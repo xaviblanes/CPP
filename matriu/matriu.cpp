@@ -1,8 +1,8 @@
-/*****************************
-* TAD matriu d'enters En C++ *
-*                            *
-* Xavi Blanes curs 24/25     *
-*****************************/
+/********************************************
+*       TAD matriu d'enters En C++          *
+*                                           *
+*       Xavi Blanes curs 24/25              *
+********************************************/
 
 #include <iostream>
 #include <cstdlib>
@@ -35,9 +35,17 @@ public:
 // ++++++++++ retorna true si el rang de la matriu que crida ++++++++++
 // al mètode és el mateix que el de la matriu passada com a paràmetre
 
-    bool mateixRang(Matriu m){
+    bool sumables(Matriu m){
         return (m.filesMatriu() == this -> filesMatriu())&&
         (m.columnesMatriu() == this -> columnesMatriu());
+    }
+
+// ++++++++++ retorna true si el nombre de files de una ++++++++++
+// és igual al de columnes de l'altra i a l'inrevés
+    
+    bool multiplicable(Matriu m){
+        return (this -> files == m.columnesMatriu()) &&
+        (this -> columnes == m.filesMatriu()) ;
     }
 
 // ++++++++++ retorna true si el nombre de files és iguals al de columnes ++++++++++
@@ -45,7 +53,7 @@ public:
     bool esQuadrada(){
         return this -> files == this ->columnes;
     }
-    
+
 // ++++++++++ multiplica una matriu per un escalar ++++++++++
 
     Matriu perEscalar(int n){
@@ -126,6 +134,23 @@ public:
         return suma;
     }
 
+// ++++++++++ retorna la matriu adjunta ++++++++++
+
+    Matriu adjunta(){
+        Matriu adj, aux;
+        int i, j, fil, col;
+        fil = this -> filesMatriu();
+        col = this -> columnesMatriu();
+        for(i=0;i<fil;i++)
+            for(j=0;j<col;j++)
+                {
+                aux = this -> menorMatriu(i,j);
+                adj.m[i][j] = pow(-1,(i+j)) * aux.determinant();
+                }
+        return adj;
+    }
+
+
 // ++++++++++ escriu per pantalla una matriu ++++++++++
 
     void escriureMatriu(){
@@ -160,7 +185,7 @@ public:
 };
 
 int main() {
-    Matriu m, n, suma, resta, trans, menor;
+    Matriu m, n, suma, resta, trans, menor, adj;
     m = m.llegirMatriu();
     m.escriureMatriu();
     
@@ -170,29 +195,31 @@ int main() {
     cout << "I la transposada és: " << endl;
     trans = m.transposada();
     trans.escriureMatriu();
+    
+    cout << "I la adjunta és: " << endl;
+    adj = m.adjunta();
+    adj.escriureMatriu();
 
     cout << "El determinant és: " << m.determinant() <<  endl;
-    menor = m.menorMatriu(1,1);
-    menor.escriureMatriu();
-
+ 
     n = n.llegirMatriu();
     n.escriureMatriu();
 
-    if(m.mateixRang(n))
+    if(m.sumables(n))
         {    
         cout << "La suma és: " << endl;
         suma = suma.sumarMatriu(m,n);
         suma.escriureMatriu();
         }
-    else cout << "No és poden sumar perquè no tenen el mateix rang!!" << endl;
+    else cout << "No és poden sumar, no són sumables!!" << endl;
     
-    if(m.mateixRang(n))
+    if(m.sumables(n))
         {    
         cout << "La resta és: " << endl;
         n = n.perEscalar(-1);
         resta = resta.sumarMatriu(m,n);
         resta.escriureMatriu();
         }
-    else cout << "No és poden restar perquè no tenen el mateix rang!!" << endl;
+    else cout << "No és poden restar, no són restables!!" << endl;
     return 0;
 }
