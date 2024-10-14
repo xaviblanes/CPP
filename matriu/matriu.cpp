@@ -150,6 +150,16 @@ public:
         return adj;
     }
 
+// ++++++++++ retorna la matriu inversa ++++++++++
+
+    Matriu inversa(){
+        Matriz aux;
+        aux = this -> adjunta();
+        aux = aux.transposada();
+        aux = aux.perEscalar(div(1,this -> determinant()));
+        return aux;
+    }
+
 
 // ++++++++++ escriu per pantalla una matriu ++++++++++
 
