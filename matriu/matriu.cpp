@@ -16,7 +16,7 @@ using namespace std;
 class Matriu {
 private:
     int files, columnes;
-    float m[10][10];
+    int m[10][10];
     
 public:
 
@@ -56,7 +56,7 @@ public:
 
 // ++++++++++ multiplica una matriu per un escalar ++++++++++
 
-    Matriu perEscalar(float n){
+    Matriu perEscalar(int n){
        Matriu aux;
        int i, j, fil, col;
        fil = this -> files;
@@ -147,6 +147,8 @@ public:
                 aux = this -> menorMatriu(i,j);
                 adj.m[i][j] = pow(-1,(i+j)) * aux.determinant();
                 }
+        adj.files = fil;
+        adj.columnes = col;
         return adj;
     }
 
@@ -154,7 +156,7 @@ public:
 
     Matriu inversa(){
         Matriu aux;
-        float x;
+        int x;
         aux = this -> adjunta();
         aux = aux.transposada();
         x = 1/(this -> determinant());
@@ -217,7 +219,7 @@ int main() {
     cout << "La inversa és: " <<  endl;
  
     inv = m.inversa();
-    m.escriureMatriu();
+    inv.escriureMatriu();
 
  
     n = n.llegirMatriu();
