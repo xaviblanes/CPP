@@ -10,14 +10,14 @@
 using namespace std;
 
 // ++++++++++ Classe Matriu d'enters ++++++++++
-// Tindrem: files, columnes, una matriu bidimensinal 
-// d'enters i els seus mètodes 
+// Tindrem: files, columnes, una matriu bidimensinal
+// d'enters i els seus mètodes
 
 class Matriu {
 private:
     int files, columnes;
     int m[10][10];
-    
+
 public:
 
 // ++++++++++ consultar el nombre de files d'una matriu ++++++++++
@@ -31,7 +31,7 @@ public:
 // ++++++++++ consultar un element concret d'una matriu ++++++++++
 
     int elementMatriu(int i, int j){return this -> m[i][j];}
-    
+
 // ++++++++++ retorna true si el rang de la matriu que crida ++++++++++
 // al mètode és el mateix que el de la matriu passada com a paràmetre
 
@@ -42,14 +42,14 @@ public:
 
 // ++++++++++ retorna true si el nombre de files de una ++++++++++
 // és igual al de columnes de l'altra i a l'inrevés
-    
-    bool multiplicable(Matriu m){
+
+    bool multiplicables(Matriu m){
         return (this -> files == m.columnesMatriu()) &&
         (this -> columnes == m.filesMatriu()) ;
     }
 
 // ++++++++++ retorna true si el nombre de files és iguals al de columnes ++++++++++
-    
+
     bool esQuadrada(){
         return this -> files == this ->columnes;
     }
@@ -64,7 +64,7 @@ public:
         for(i=0;i<fil;i++)
             for(j=0;j<col;j++)
             aux.m[i][j] = this -> elementMatriu(i,j) * n;
-        return aux;    
+        return aux;
     }
 
 // ++++++++++ elimina de una matriu la fila i la columna ++++++++++
@@ -87,7 +87,7 @@ public:
                 }
             }
             aux.files = aux.columnes = fil;
-        return aux;    
+        return aux;
     }
 
 // ++++++++++ retorna la transposada d'una matriu ++++++++++
@@ -102,7 +102,7 @@ public:
             trans.m[i][j] = this -> elementMatriu(j,i);
         trans.files = col;
         trans.columnes = fil;
-        return trans;    
+        return trans;
     }
 
 // ++++++++++ retorna el valor del determinant d'una matriu ++++++++++
@@ -116,12 +116,12 @@ public:
             for(j=0;j<dim;j++)
                 {
                 aux = this -> menorMatriu(0,j);
-                det = det + ( pow(-1,j) * this -> elementMatriu(0,j) 
+                det = det + ( pow(-1,j) * this -> elementMatriu(0,j)
                 * aux.determinant());
                 }
-        return det;    
+        return det;
     }
-    
+
 // ++++++++++ suma dues matrius, sumar m + (-1)·n és  ++++++++++
 // el mateix que restar n de m. Aleshores resta no cal.
 
@@ -132,6 +132,17 @@ public:
             for(j=0;j<m.columnesMatriu();j++)
             suma.m[i][j] = m.elementMatriu(i,j) + n.elementMatriu(i,j);
         return suma;
+    }
+
+// ++++++++++ multiplica dues matrius
+
+    Matriu multiplicarMatriu(Matriu m, Matriu n){
+       Matriu multi;
+       int i, j;
+        for(i=0;i<m.filesMatriu();i++)
+            for(j=0;j<m.columnesMatriu();j++)
+            multi.m[i][j] = m.elementMatriu(i,j) * n.elementMatriu(j,i);
+        return multi;
     }
 
 // ++++++++++ retorna la matriu adjunta ++++++++++
@@ -192,49 +203,57 @@ public:
         for(j=0;j<matriu.columnes;j++)
             {
             cout << "Element " << i+1 << ", " << j+1 << ": ";
-            cin >> matriu.m[i][j];        
+            cin >> matriu.m[i][j];
             }
         return matriu;
     }
 };
 
 int main() {
-    Matriu m, n, suma, resta, trans, menor, adj, inv;
+    Matriu m, n, suma, resta, trans, menor, adj, inv, multi;
     m = m.llegirMatriu();
     m.escriureMatriu();
-    
+
     if(m.esQuadrada()) cout << "Sí, és quadrada" << endl;
     else cout << "No, no és quadrada" << endl;
-    
+
     cout << "I la transposada és: " << endl;
     trans = m.transposada();
     trans.escriureMatriu();
-    
+
     cout << "I la adjunta és: " << endl;
     adj = m.adjunta();
     adj.escriureMatriu();
 
     cout << "El determinant és: " << m.determinant() <<  endl;
-    
+
     cout << "La inversa és: " <<  endl;
- 
+
     inv = m.inversa();
     inv.escriureMatriu();
 
- 
+
     n = n.llegirMatriu();
     n.escriureMatriu();
 
+    if(m.multiplicables(n))
+        {
+        cout << "La multiplicació és: " << endl;
+        multi = multi.multiplicarMatriu(m,n);
+        multi.escriureMatriu();
+        }
+    else cout << "No és poden multiplicar, no són multiplicables!!" << endl;
+
     if(m.sumables(n))
-        {    
+        {
         cout << "La suma és: " << endl;
         suma = suma.sumarMatriu(m,n);
         suma.escriureMatriu();
         }
     else cout << "No és poden sumar, no són sumables!!" << endl;
-    
+
     if(m.sumables(n))
-        {    
+        {
         cout << "La resta és: " << endl;
         n = n.perEscalar(-1);
         resta = resta.sumarMatriu(m,n);
