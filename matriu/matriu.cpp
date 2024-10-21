@@ -144,7 +144,7 @@ public:
         for(i=0;i<fil;i++)
             for(j=0;j<col;j++){
                 ac = 0;
-                for(k=0;k<fil;k++) ac = ac + m.elementMatriu(i,k) * n.elementMatriu(k,i);
+                for(k=0;k<fil;k++) ac = ac + m.elementMatriu(i,k) * n.elementMatriu(k,j);
             multi.m[i][j] = ac;
             }
         return multi;
