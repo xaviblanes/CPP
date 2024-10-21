@@ -138,10 +138,15 @@ public:
 
     Matriu multiplicarMatriu(Matriu m, Matriu n){
        Matriu multi;
-       int i, j;
-        for(i=0;i<m.filesMatriu();i++)
-            for(j=0;j<m.columnesMatriu();j++)
-            multi.m[i][j] = m.elementMatriu(i,j) * n.elementMatriu(j,i);
+       int i, j, k, fil, col, ac;
+       fil = m.filesMatriu();
+       col = m.columnesMatriu();
+        for(i=0;i<fil;i++)
+            for(j=0;j<col;j++){
+                ac = 0;
+                for(k=0;k<fil;k++) ac = ac + m.elementMatriu(i,k) * n.elementMatriu(k,i);
+            multi.m[i][j] = ac;
+            }
         return multi;
     }
 
