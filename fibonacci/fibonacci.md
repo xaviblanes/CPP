@@ -15,10 +15,12 @@ i cadascun dels següents termes és la suma dels dos anteriors:
 
 Aquesta successió queda definida per recursivitat com:
 
-F ( n ) = 0 , si  n = 0 ;
+F ( n ) = 0 , si  n = 0
 
-F ( n ) = 1 , si  n = 1 ;    
+F ( n ) = 1 , si  n = 1
 
-F ( n ) = F ( n − 1 ) + F ( n − 2 ) n>1
+F ( n ) = 1 , si  n = 2
+
+F ( n ) = F ( n − 1 ) + F ( n − 2 ), si n > 2
 
 Els vint primers termes d'aquesta successió són: 1 	1 	2 	3 	5 	8 	13 	21 	34 	55 	89 	144 233 377 610 987 1597 2584 	4181 6765
