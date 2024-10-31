@@ -2,6 +2,8 @@
 
 La successió de Fibonacci és una successió matemàtica de nombres naturals tal que cada un dels seus termes és igual a la suma dels dos anteriors. Aquesta successió va ser descrita per primera vegada per Leonardo de Pisa Fibonacci i cadascun dels seus termes rep el nom de nombre de Fibonacci.
 
+![Un enrajolat amb quadrats els costats dels quals tenen una longitud de nombres de Fibonacci successius](FibonacciBlocks.png)
+
 Si es pren una successió de nombres naturals de tal forma que els dos primers termes siguen
 
     F(0) = 0
